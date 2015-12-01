@@ -1,10 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Exams List</title>
 </head>
 <body>
+
+<div id="logout_layer">
+    <a id="logout" href="/jpa/logout">
+        Log out from the site
+    </a>
+</div>
+
 <table border="1">
     <tr>
         <th>Id</th>
@@ -24,7 +32,10 @@
     </c:forEach>
 </table>
 <br/>
-<input type="button" onclick="location.href='/jpa/exams/add';" value="Add an exam" />
+<sec:authorize ifAnyGranted="ROLE_ADMIN">
+    <input type="button" onclick="location.href='/jpa/exams/add';" value="Add an exam" />
+</sec:authorize>
+
 
 </body>
 </html>
